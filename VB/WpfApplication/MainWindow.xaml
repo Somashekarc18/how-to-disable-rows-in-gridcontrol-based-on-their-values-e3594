@@ -1,0 +1,60 @@
+﻿<Window x:Class="WpfApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WpfApplication"
+        xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
+        Title="MainWindow" Height="454" Width="755" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid">
+    <Window.Resources>
+        <local:ViewModel x:Key="viewModel"/>
+        <Style x:Key="BackgroundStyle" TargetType="{x:Type dxg:RowControl}">
+            <Setter Property="IsEnabled" Value="{Binding Path=Row.AllowEdit}"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Row.AllowEdit}" Value="False">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="LightGray" />
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Foreground">
+                        <Setter.Value>
+                            <SolidColorBrush Color="DarkGray" />
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="dxg:DataViewBase.IsFocusedRow" Value="True" />
+                        <Condition Property="IsEnabled" Value="False" />
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Background" Value="{Binding Path=Row.AllowEdit, Converter={local:RowStateConverter}, ConverterParameter=Background}" />
+                    <Setter Property="Foreground" Value="{Binding Path=Row.AllowEdit, Converter={local:RowStateConverter}, ConverterParameter=Foreground}" />
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="FocusedCellStyle" TargetType="dxg:LightweightCellEditor"  BasedOn="{StaticResource {dxgt:GridRowThemeKey ResourceKey=LightweightCellStyle}}">
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="dxg:DataViewBase.IsFocusedCell" Value="True" />
+                        <Condition Property="IsEnabled" Value="False" />
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Background" Value="{Binding Path=RowData.Row.AllowEdit, Converter={local:RowStateConverter}, ConverterParameter=Background}" />
+                    <Setter Property="Foreground" Value="{Binding Path=RowData.Row.AllowEdit, Converter={local:RowStateConverter}, ConverterParameter=Foreground}" />
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource viewModel}">
+        <dxg:GridControl Name="gridControl1" ItemsSource="{Binding DataSource}">
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="Name" />
+                <dxg:GridColumn FieldName="ID" />
+                <dxg:GridColumn FieldName="Date" />
+                <dxg:GridColumn FieldName="AllowEdit" />
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.View>
+                <dxg:TableView Name="tableView1" local:RowStateHelper.IsHelperEnabled="True" RowStyle="{StaticResource BackgroundStyle}" CellStyle="{StaticResource FocusedCellStyle}" />
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </Grid>
+</Window>
