@@ -1,3 +1,13 @@
+<!-- default file list -->
+*Files to look at*:
+
+* [MainWindow.xaml](./CS/WpfApplication/MainWindow.xaml) (VB: [MainWindow.xaml.vb](./VB/WpfApplication/MainWindow.xaml.vb))
+* [MainWindow.xaml.cs](./CS/WpfApplication/MainWindow.xaml.cs) (VB: [MainWindow.xaml.vb](./VB/WpfApplication/MainWindow.xaml.vb))
+* [DataHelper.cs](./CS/WpfApplication/Model/DataHelper.cs) (VB: [DataHelper.vb](./VB/WpfApplication/Model/DataHelper.vb))
+* [RowStateConverter.cs](./CS/WpfApplication/RowStateHelper/RowStateConverter.cs) (VB: [RowStateConverter.vb](./VB/WpfApplication/RowStateHelper/RowStateConverter.vb))
+* [RowStateHelper.cs](./CS/WpfApplication/RowStateHelper/RowStateHelper.cs) (VB: [RowStateHelper.vb](./VB/WpfApplication/RowStateHelper/RowStateHelper.vb))
+* [ViewModel.cs](./CS/WpfApplication/ViewModel/ViewModel.cs) (VB: [ViewModel.vb](./VB/WpfApplication/ViewModel/ViewModel.vb))
+<!-- default file list end -->
 # How to disable rows in GridControl based on their values
 
 
