@@ -10,7 +10,7 @@ namespace WpfApplication {
 
         public ViewModel() {
             Items = new ObservableCollection<GridItem>();
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 15; i++)  
                 Items.Add(ViewModelSource.Create(() => new GridItem() { AllowEdit = i % 3 != 0, Name = String.Format("Name{0}", i), ID = i }));
             CurrentItem = Items[0];
         }
